@@ -31,16 +31,16 @@ Lemmatization means transforming all the inflected forms of a word into the one 
 ### Tf-idf
 
 We need to have a strategy to transform a review into a vector of feature values. One intuitive way is to index all the words that occur in our dataset as the features and the value will be the occurring times in a review. However, we might underestimate the value of some words because of its rarity in the whole corpus and overestimate some words because of its popularity. With this aspect, we use tf-idf value as our feature value instead of occurring times. Tf-idf represents the product of the term-frequency and the inverse document-frequency. Below is the mathematical representation of the tf-idf value:
-$$
-tfidf = \frac{N_{i,j}}{N_{*,j}}log(\frac{D}{D_i})$
-$$
-$N_{i,j}$ - The number of times word i occurs in the review j.
 
-$N_{*,j}$ - Total number of words in the review j.
+![](img/a.svg)
 
-$D$ - Total number of the reviews.
+![](img/b.svg): The number of times word i occurs in the review j.
 
-$D_i$ - Total number of the reviews that contains word i.
+![](img/c.svg): Total number of words in the review j.
+
+![](img/d.svg): Total number of the reviews.
+
+![](img/e.svg): Total number of the reviews that contains word i.
 
 ### N-gram
 
@@ -53,9 +53,9 @@ We use the external library, Scikit-learn, to implement our features extraction.
 ## Model 1: Logistic Regression
 
 We use `LogisticRegression()` model in sklearn library to implement. Note the optimization problem the model use is a little bit different from the one we learned from the course. Below is the cost function that the model optimize on (with L2 regularization):
-$$
-min_{\omega,c}\frac{1}{2}\omega^T\omega + C\displaystyle\sum_{i=1}^{n}log(exp(-y_i(X^T_i\omega+c))+1)
-$$
+
+![](img/f.svg)
+
 In this model, it puts the penalty term, C, on the error side rather than the parameter regularization side. Therefore, the penalty term here is the inverse of regularization strength. Smaller value will give stronger regularization and reduce the overfitting issue. Below is the result for the penalty C range from 0.01 to 10 and the result for different regularization with the validation set.
 
 ![](img/1.png)
